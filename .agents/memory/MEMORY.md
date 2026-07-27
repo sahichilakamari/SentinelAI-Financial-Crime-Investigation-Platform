@@ -1,0 +1,2 @@
+- [Tailwind v4 dark mode](tailwind-v4-dark.md) — `@apply dark` is invalid in Tailwind v4; apply dark class via JS instead
+- [Fine-grained PAT repo creation](github-pat-limits.md) — fine-grained PATs need "Administration: write" to create repos; push fails if repo doesn't exist
