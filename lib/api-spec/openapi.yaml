@@ -1,22 +1,32 @@
 openapi: 3.1.0
 info:
-  # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: SentinelAI - AI Financial Crime Investigation Platform API
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: investigations
+    description: Investigation case management
+  - name: episodes
+    description: Investigation episode steps
+  - name: evidence
+    description: Evidence items collected per investigation
+  - name: transactions
+    description: Transaction events for attack replay
+  - name: entities
+    description: Entity relationship graph nodes and edges
+  - name: dashboard
+    description: Dashboard summary and analytics
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -24,6 +34,259 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /dashboard/summary:
+    get:
+      operationId: getDashboardSummary
+      tags: [dashboard]
+      summary: Get dashboard summary stats
+      responses:
+        "200":
+          description: Summary stats
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DashboardSummary"
+
+  /dashboard/recent-activity:
+    get:
+      operationId: getRecentActivity
+      tags: [dashboard]
+      summary: Get recent investigation activity feed
+      responses:
+        "200":
+          description: Recent activity list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ActivityItem"
+
+  /dashboard/risk-breakdown:
+    get:
+      operationId: getRiskBreakdown
+      tags: [dashboard]
+      summary: Get fraud type risk breakdown counts
+      responses:
+        "200":
+          description: Risk breakdown by fraud type
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RiskBreakdownItem"
+
+  /investigations:
+    get:
+      operationId: listInvestigations
+      tags: [investigations]
+      summary: List all investigations
+      responses:
+        "200":
+          description: List of investigations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Investigation"
+    post:
+      operationId: createInvestigation
+      tags: [investigations]
+      summary: Create a new investigation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InvestigationInput"
+      responses:
+        "201":
+          description: Created investigation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Investigation"
+
+  /investigations/{id}:
+    get:
+      operationId: getInvestigation
+      tags: [investigations]
+      summary: Get investigation by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Investigation details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Investigation"
+        "404":
+          description: Not found
+    patch:
+      operationId: updateInvestigation
+      tags: [investigations]
+      summary: Update investigation status or details
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InvestigationUpdate"
+      responses:
+        "200":
+          description: Updated investigation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Investigation"
+    delete:
+      operationId: deleteInvestigation
+      tags: [investigations]
+      summary: Delete an investigation
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  /investigations/{id}/episodes:
+    get:
+      operationId: listEpisodes
+      tags: [episodes]
+      summary: List all episodes for an investigation
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Episodes list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Episode"
+
+  /investigations/{id}/evidence:
+    get:
+      operationId: listEvidence
+      tags: [evidence]
+      summary: List all evidence for an investigation
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Evidence list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EvidenceItem"
+
+  /investigations/{id}/transactions:
+    get:
+      operationId: listTransactions
+      tags: [transactions]
+      summary: List transaction events for attack replay timeline
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Transaction events
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TransactionEvent"
+
+  /investigations/{id}/graph:
+    get:
+      operationId: getEntityGraph
+      tags: [entities]
+      summary: Get entity relationship graph for an investigation
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Entity graph with nodes and edges
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EntityGraph"
+
+  /investigations/{id}/ai-findings:
+    get:
+      operationId: getAiFindings
+      tags: [investigations]
+      summary: Get AI findings and SHAP explanation for an investigation
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: AI findings with risk factors
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AiFindings"
+
+  /investigations/{id}/report:
+    get:
+      operationId: getInvestigationReport
+      tags: [investigations]
+      summary: Get full compliance report for an investigation
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Full investigation report
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvestigationReport"
+
 components:
   schemas:
     HealthStatus:
@@ -34,3 +297,361 @@ components:
       required:
         - status
 
+    DashboardSummary:
+      type: object
+      properties:
+        totalInvestigations:
+          type: integer
+        openInvestigations:
+          type: integer
+        criticalAlerts:
+          type: integer
+        resolvedToday:
+          type: integer
+        avgRiskScore:
+          type: number
+        transactionsMonitored:
+          type: integer
+      required:
+        - totalInvestigations
+        - openInvestigations
+        - criticalAlerts
+        - resolvedToday
+        - avgRiskScore
+        - transactionsMonitored
+
+    ActivityItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        investigationId:
+          type: integer
+        investigationTitle:
+          type: string
+        action:
+          type: string
+        timestamp:
+          type: string
+        severity:
+          type: string
+      required:
+        - id
+        - investigationId
+        - investigationTitle
+        - action
+        - timestamp
+        - severity
+
+    RiskBreakdownItem:
+      type: object
+      properties:
+        fraudType:
+          type: string
+        count:
+          type: integer
+        percentage:
+          type: number
+      required:
+        - fraudType
+        - count
+        - percentage
+
+    Investigation:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        fraudType:
+          type: string
+        severity:
+          type: string
+        status:
+          type: string
+        riskScore:
+          type: number
+        summary:
+          type: string
+        affectedAccount:
+          type: string
+        amount:
+          type: number
+        currency:
+          type: string
+        analystNote:
+          type: ["string", "null"]
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+      required:
+        - id
+        - title
+        - fraudType
+        - severity
+        - status
+        - riskScore
+        - summary
+        - affectedAccount
+        - amount
+        - currency
+        - createdAt
+        - updatedAt
+
+    InvestigationInput:
+      type: object
+      properties:
+        title:
+          type: string
+        fraudType:
+          type: string
+        severity:
+          type: string
+        summary:
+          type: string
+        affectedAccount:
+          type: string
+        amount:
+          type: number
+        currency:
+          type: string
+        analystNote:
+          type: string
+      required:
+        - title
+        - fraudType
+        - severity
+        - summary
+        - affectedAccount
+        - amount
+        - currency
+
+    InvestigationUpdate:
+      type: object
+      properties:
+        title:
+          type: string
+        status:
+          type: string
+        severity:
+          type: string
+        analystNote:
+          type: string
+
+    Episode:
+      type: object
+      properties:
+        id:
+          type: integer
+        investigationId:
+          type: integer
+        episodeNumber:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+        aiNarrative:
+          type: string
+      required:
+        - id
+        - investigationId
+        - episodeNumber
+        - title
+        - description
+        - status
+        - aiNarrative
+
+    EvidenceItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        investigationId:
+          type: integer
+        evidenceType:
+          type: string
+        label:
+          type: string
+        value:
+          type: string
+        riskLevel:
+          type: string
+        collectedAt:
+          type: string
+      required:
+        - id
+        - investigationId
+        - evidenceType
+        - label
+        - value
+        - riskLevel
+        - collectedAt
+
+    TransactionEvent:
+      type: object
+      properties:
+        id:
+          type: integer
+        investigationId:
+          type: integer
+        timestamp:
+          type: string
+        eventTime:
+          type: string
+        eventType:
+          type: string
+        description:
+          type: string
+        amount:
+          type: ["number", "null"]
+        isSuspicious:
+          type: boolean
+        sequenceOrder:
+          type: integer
+      required:
+        - id
+        - investigationId
+        - timestamp
+        - eventTime
+        - eventType
+        - description
+        - isSuspicious
+        - sequenceOrder
+
+    EntityNode:
+      type: object
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+        entityType:
+          type: string
+        riskLevel:
+          type: string
+        metadata:
+          type: string
+      required:
+        - id
+        - label
+        - entityType
+        - riskLevel
+
+    EntityEdge:
+      type: object
+      properties:
+        id:
+          type: string
+        source:
+          type: string
+        target:
+          type: string
+        relationshipType:
+          type: string
+      required:
+        - id
+        - source
+        - target
+        - relationshipType
+
+    EntityGraph:
+      type: object
+      properties:
+        nodes:
+          type: array
+          items:
+            $ref: "#/components/schemas/EntityNode"
+        edges:
+          type: array
+          items:
+            $ref: "#/components/schemas/EntityEdge"
+      required:
+        - nodes
+        - edges
+
+    RiskFactor:
+      type: object
+      properties:
+        factor:
+          type: string
+        contribution:
+          type: number
+        description:
+          type: string
+      required:
+        - factor
+        - contribution
+        - description
+
+    AiFindings:
+      type: object
+      properties:
+        investigationId:
+          type: integer
+        fraudProbability:
+          type: number
+        modelConfidence:
+          type: number
+        primaryConclusion:
+          type: string
+        riskFactors:
+          type: array
+          items:
+            $ref: "#/components/schemas/RiskFactor"
+        predictiveInsight:
+          type: string
+        recommendedActions:
+          type: array
+          items:
+            type: string
+      required:
+        - investigationId
+        - fraudProbability
+        - modelConfidence
+        - primaryConclusion
+        - riskFactors
+        - predictiveInsight
+        - recommendedActions
+
+    InvestigationReport:
+      type: object
+      properties:
+        investigationId:
+          type: integer
+        title:
+          type: string
+        executiveSummary:
+          type: string
+        generatedAt:
+          type: string
+        fraudType:
+          type: string
+        severity:
+          type: string
+        riskScore:
+          type: number
+        affectedAccount:
+          type: string
+        amount:
+          type: number
+        currency:
+          type: string
+        complianceNotes:
+          type: string
+      required:
+        - investigationId
+        - title
+        - executiveSummary
+        - generatedAt
+        - fraudType
+        - severity
+        - riskScore
+        - affectedAccount
+        - amount
+        - currency
+        - complianceNotes
