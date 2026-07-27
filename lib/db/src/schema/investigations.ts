@@ -28,7 +28,7 @@ export const episodesTable = pgTable("episodes", {
   episodeNumber: integer("episode_number").notNull(),
   title: text("title").notNull(),
   description: text("description").notNull(),
-  status: text("status").notNull().default("locked"),
+  status: text("status").notNull().default("available"),
   aiNarrative: text("ai_narrative").notNull(),
 });
 
