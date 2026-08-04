@@ -23,12 +23,6 @@ SentinelAI restructures investigations into a guided workflow where evidence, ti
 
 <img width="241" height="214" alt="image" src="https://github.com/user-attachments/assets/c088eb3f-e7db-4432-a5cb-4c174b896b6e" />
 
-<img width="155" height="101" alt="image" src="https://github.com/user-attachments/assets/b0e6030f-f2bd-4e57-a5e2-fd0ebf9f204e" />
-
-<img width="169" height="101" alt="image" src="https://github.com/user-attachments/assets/d8bd1b47-85b4-4629-9935-47ac16b9a2a7" />
-
-<img width="156" height="103" alt="image" src="https://github.com/user-attachments/assets/29c8f0d9-9997-41e1-9b52-01c5f72bffa2" />
-
 ---
 
 ## Features
