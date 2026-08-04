@@ -9,6 +9,14 @@ Traditional fraud systems tell analysts **whether** a transaction is suspicious.
 
 ---
 
+## Why SentinelAI?
+
+Traditional fraud tools overwhelm analysts with disconnected alerts, logs, and dashboards.
+
+SentinelAI restructures investigations into a guided workflow where evidence, timelines, relationships, and AI explanations are presented in the order analysts naturally investigate a case.
+
+---
+
 ## Features
 
 - **Investigation Center** — Netflix-style grid of active fraud cases with risk scores and severity badges
