@@ -2,4 +2,15 @@ node_modules/
 dist/
 .env
 *.map
+*.tsbuildinfo
 pnpm-lock.yaml
+
+# Replit internal files
+.replit
+.replitignore
+replit.md
+.agents/
+.local/
+artifacts/mockup-sandbox/
+artifacts/**/.replit-artifact/
+attached_assets/
