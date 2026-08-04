@@ -1,9 +1,11 @@
-# SentinelAI — AI Financial Crime Investigation Platform
+<img width="959" height="494" alt="image" src="https://github.com/user-attachments/assets/97f20813-935b-4df3-b6b3-d50e2d22e6d1" />
+# SentinelAI
 
-A full-stack financial crime investigation platform with a Netflix-style "investigation room" experience. Analysts step through fraud cases as sequential episodes instead of static dashboards.
+## AI-Powered Financial Crime Investigation Platform
 
-![SentinelAI](https://img.shields.io/badge/Stack-React%20%2B%20Express%20%2B%20PostgreSQL-blue)
-![License](https://img.shields.io/badge/License-MIT-green)
+Traditional fraud systems tell analysts **whether** a transaction is suspicious.
+
+**SentinelAI explains what happened, why it happened, who was involved, and how the fraud unfolded through an interactive investigation experience.**
 
 ---
 
@@ -164,7 +166,3 @@ Four investigation cases are pre-loaded:
 | Synthetic Identity — Loan Fraud | Synthetic ID | 81% | $142,000 |
 
 ---
-
-## License
-
-MIT
