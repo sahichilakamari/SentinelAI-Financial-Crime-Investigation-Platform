@@ -162,7 +162,7 @@ GET  /api/dashboard/risk-breakdown    Chart data
 
 ---
 
-## Seeded Demo Data
+## Demo Investigation Cases
 
 Four investigation cases are pre-loaded:
 
