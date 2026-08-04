@@ -79,10 +79,6 @@ sentinel-ai/
 │               ├── investigations.ts     # Case + episode endpoints
 │               └── dashboard.ts         # Stats + activity endpoints
 ├── lib/
-│   ├── api-spec/
-│   │   └── openapi.yaml      # API contract (source of truth)
-│   ├── api-client-react/     # Auto-generated React Query hooks
-│   ├── api-zod/              # Auto-generated Zod schemas
 │   └── db/
 │       └── src/schema/
 │           └── investigations.ts  # All DB tables
@@ -203,28 +199,6 @@ pnpm --filter @workspace/api-spec run codegen
 | `entity_edges` | Relationships between entities |
 | `ai_findings` | ML model output: fraud probability, SHAP factors, conclusions |
 | `activity_log` | Analyst action audit trail |
-
----
-
-## API Endpoints
-
-```
-GET  /api/investigations              List all investigations
-POST /api/investigations              Create investigation
-GET  /api/investigations/:id          Get investigation
-PATCH /api/investigations/:id         Update investigation
-
-GET  /api/investigations/:id/episodes       List episodes
-GET  /api/investigations/:id/evidence       List evidence
-GET  /api/investigations/:id/transactions   Attack timeline
-GET  /api/investigations/:id/graph          Entity relationship graph
-GET  /api/investigations/:id/ai-findings    ML model output
-GET  /api/investigations/:id/report         Compliance report
-
-GET  /api/dashboard/summary           Stats cards
-GET  /api/dashboard/recent-activity   Activity feed
-GET  /api/dashboard/risk-breakdown    Chart data
-```
 
 ---
 
