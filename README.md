@@ -32,33 +32,14 @@ SentinelAI restructures investigations into a guided workflow where evidence, ti
   <img width="959" height="494" alt="image" src="https://github.com/user-attachments/assets/97f20813-935b-4df3-b6b3-d50e2d22e6d1" />
   
 - **Investigation Room** — 7-episode narrative case flow per investigation:
+
   1. Initial Alert — AI-generated case narrative
-
-      <img width="935" height="488" alt="image" src="https://github.com/user-attachments/assets/d7eee108-5365-4a39-9522-6bcf09ddfb88" />
-
-  3. Attack Timeline — animated transaction replay
-
-     <img width="828" height="495" alt="image" src="https://github.com/user-attachments/assets/aa384cfd-23af-48ce-84cf-34bf127aaa25" />
-
-  5. Evidence Collection — digital evidence wall
-
-     <img width="943" height="488" alt="image" src="https://github.com/user-attachments/assets/34cce0c1-e1cf-4647-8f5e-a7da7d2b9ebb" />
-
-  7. Relationship Explorer — interactive SVG entity graph
-
-     <img width="941" height="485" alt="image" src="https://github.com/user-attachments/assets/e3ef9005-b3f3-4cc0-85cd-4c7dee31e0cc" />
-
-  9. AI Findings — fraud probability gauge with SHAP-style factor breakdown
-
-     <img width="940" height="493" alt="image" src="https://github.com/user-attachments/assets/033faa14-eb4d-41f2-aead-91c43f2e4fb4" />
-
-  11. Recommended Actions — analyst action checklist
-
-      <img width="944" height="488" alt="image" src="https://github.com/user-attachments/assets/378c307f-3849-4ec7-acc8-386441b11692" />
-
-  13. Investigation Report — compliance-ready export
-
-      <img width="944" height="481" alt="image" src="https://github.com/user-attachments/assets/727d68ea-ead4-42e4-9c34-40dea9ad5ac4" />
+  2. Attack Timeline — animated transaction replay
+  3. Evidence Collection — digital evidence wall
+  4. Relationship Explorer — interactive SVG entity graph
+  5. AI Findings — fraud probability gauge with SHAP-style factor breakdown
+  6. Recommended Actions — analyst action checklist
+  7. Investigation Report — compliance-ready export
 
 - **Analytics Dashboard** — live stats, risk breakdown chart, activity feed
 
